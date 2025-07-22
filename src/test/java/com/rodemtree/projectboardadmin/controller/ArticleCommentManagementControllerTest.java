@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,6 +37,7 @@ class ArticleCommentManagementControllerTest {
         this.mvc = mvc;
     }
 
+    @WithMockUser(username = "tester", roles = "USER")
     @DisplayName("[view][GET] 댓글 관리 페이지 - 정상 호출")
     @Test
     void givenNothing_whenRequestingArticleCommentManagementView_thenReturnsArticleCommentManagementView() throws Exception {
@@ -51,6 +53,7 @@ class ArticleCommentManagementControllerTest {
         then(articleCommentManagementService).should().getArticleComments();
     }
 
+    @WithMockUser(username = "tester", roles = "USER")
     @DisplayName("[data][GET] 댓글 1개 - 정상 호출")
     @Test
     void givenCommentId_whenRequestingArticleComment_thenReturnsArticleComment() throws Exception {
@@ -69,6 +72,7 @@ class ArticleCommentManagementControllerTest {
         then(articleCommentManagementService).should().getArticleComment(articleCommentId);
     }
 
+    @WithMockUser(username = "tester", roles = "MANAGER")
     @DisplayName("[view][POST] 댓글 삭제 - 정상 호출")
     @Test
     void givenCommentId_whenRequestingDeletion_thenRedirectsToArticleCommentManagementView() throws Exception {
