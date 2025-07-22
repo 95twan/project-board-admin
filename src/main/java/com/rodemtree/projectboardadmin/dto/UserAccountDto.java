@@ -7,7 +7,6 @@ import java.util.Set;
 
 public record UserAccountDto(
         String userId,
-        Set<RoleType> roleTypes,
         String email,
         String nickname,
         String memo,
@@ -18,17 +17,15 @@ public record UserAccountDto(
 ) {
     public static UserAccountDto of(
             String userId,
-            Set<RoleType> roleTypes,
             String email,
             String nickname,
             String memo
     ) {
-        return UserAccountDto.of(userId, roleTypes, email, nickname, memo, null, null, null, null);
+        return UserAccountDto.of(userId, email, nickname, memo, null, null, null, null);
     }
 
     public static UserAccountDto of(
             String userId,
-            Set<RoleType> roleTypes,
             String email,
             String nickname,
             String memo,
@@ -37,7 +34,7 @@ public record UserAccountDto(
             LocalDateTime modifiedAt,
             String modifiedBy
     ) {
-        return new UserAccountDto(userId, roleTypes, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
+        return new UserAccountDto(userId, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
 }
