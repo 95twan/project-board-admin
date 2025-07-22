@@ -1,9 +1,6 @@
 package com.rodemtree.projectboardadmin.dto;
 
-import com.rodemtree.projectboardadmin.domain.constant.RoleType;
-
 import java.time.LocalDateTime;
-import java.util.Set;
 
 public record UserAccountDto(
         String userId,
