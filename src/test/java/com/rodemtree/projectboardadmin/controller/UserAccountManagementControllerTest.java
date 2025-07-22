@@ -1,6 +1,6 @@
 package com.rodemtree.projectboardadmin.controller;
 
-import com.rodemtree.projectboardadmin.config.SecurityConfig;
+import com.rodemtree.projectboardadmin.config.TestSecurityConfig;
 import com.rodemtree.projectboardadmin.dto.UserAccountDto;
 import com.rodemtree.projectboardadmin.service.UserAccountManagementService;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @DisplayName("View 컨트롤러 - 회원 관리")
-@Import(SecurityConfig.class)
+@Import(TestSecurityConfig.class)
 @WebMvcTest(UserAccountManagementController.class)
 class UserAccountManagementControllerTest {
 
