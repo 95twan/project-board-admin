@@ -1,15 +1,9 @@
 package com.rodemtree.projectboardadmin.dto;
 
-import com.rodemtree.projectboardadmin.domain.UserAccount;
-import com.rodemtree.projectboardadmin.domain.constant.RoleType;
-
 import java.time.LocalDateTime;
-import java.util.Set;
 
 public record UserAccountDto(
         String userId,
-        String userPassword,
-        Set<RoleType> roleTypes,
         String email,
         String nickname,
         String memo,
@@ -20,19 +14,15 @@ public record UserAccountDto(
 ) {
     public static UserAccountDto of(
             String userId,
-            String userPassword,
-            Set<RoleType> roleTypes,
             String email,
             String nickname,
             String memo
     ) {
-        return UserAccountDto.of(userId, userPassword, roleTypes, email, nickname, memo, null, null, null, null);
+        return UserAccountDto.of(userId, email, nickname, memo, null, null, null, null);
     }
 
     public static UserAccountDto of(
             String userId,
-            String userPassword,
-            Set<RoleType> roleTypes,
             String email,
             String nickname,
             String memo,
@@ -41,32 +31,7 @@ public record UserAccountDto(
             LocalDateTime modifiedAt,
             String modifiedBy
     ) {
-        return new UserAccountDto(userId, userPassword, roleTypes, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
+        return new UserAccountDto(userId, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
 
-    public static UserAccountDto from(UserAccount entity) {
-        return new UserAccountDto(
-                entity.getUserId(),
-                entity.getUserPassword(),
-                entity.getRoleTypes(),
-                entity.getEmail(),
-                entity.getNickname(),
-                entity.getMemo(),
-                entity.getCreatedAt(),
-                entity.getCreatedBy(),
-                entity.getModifiedAt(),
-                entity.getModifiedBy()
-        );
-    }
-
-    public UserAccount toEntity() {
-        return UserAccount.of(
-                userId,
-                userPassword,
-                roleTypes,
-                email,
-                nickname,
-                memo
-        );
-    }
 }
