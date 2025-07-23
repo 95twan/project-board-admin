@@ -1,7 +1,9 @@
 package com.rodemtree.projectboardadmin.controller;
 
+import com.rodemtree.projectboardadmin.dto.AdminAccountDto;
 import com.rodemtree.projectboardadmin.dto.response.AdminAccountResponse;
-import jakarta.servlet.http.HttpServletRequest;
+import com.rodemtree.projectboardadmin.service.AdminAccountService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/admin/members")
+@RequiredArgsConstructor
 @Controller
 public class AdminAccountController {
 
-    @GetMapping
+    private final AdminAccountService adminAccountService;
+
+    @GetMapping("/admin/members")
     public String members(Model model) {
         return "admin/members";
     }
@@ -21,12 +25,16 @@ public class AdminAccountController {
     @ResponseBody
     @GetMapping("/api/admin/members")
     public List<AdminAccountResponse> getMembers() {
-        return List.of();
+        List<AdminAccountDto> adminAccounts = adminAccountService.users();
+        return adminAccounts.stream()
+                .map(AdminAccountResponse::from)
+                .toList();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @ResponseBody
     @DeleteMapping("/api/admin/members/{userId}")
     public void delete(@PathVariable String userId) {
+        adminAccountService.deleteUser(userId);
     }
 }
