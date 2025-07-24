@@ -1,4 +1,4 @@
-package com.rodemtree.projectboardadmin.controller;
+package com.rodemtree.projectboardadmin.controller.advice;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
